@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sneakership.databinding.ItemSneakersListBinding
 import com.example.sneakership.ui.home.data.SneakersListDtoItem
 
-class SneakerListRecyclerViewAdapter : ListAdapter<SneakersListDtoItem, SneakerListRecyclerViewAdapter.ViewHolder>(object:
+class SneakerListRecyclerViewAdapter(private val listener: (item: SneakersListDtoItem) -> Unit) : ListAdapter<SneakersListDtoItem, SneakerListRecyclerViewAdapter.ViewHolder>(object:
     DiffUtil.ItemCallback<SneakersListDtoItem>() {
     override fun areItemsTheSame(
         oldItem: SneakersListDtoItem,
@@ -26,8 +26,11 @@ class SneakerListRecyclerViewAdapter : ListAdapter<SneakersListDtoItem, SneakerL
 
 }){
     class ViewHolder(private val binding: ItemSneakersListBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: SneakersListDtoItem) {
+        fun bind(item: SneakersListDtoItem, listener: (item: SneakersListDtoItem) -> Unit) {
             binding.item = item
+            binding.root.setOnClickListener {
+                listener(item)
+            }
         }
 
 
@@ -41,6 +44,6 @@ class SneakerListRecyclerViewAdapter : ListAdapter<SneakersListDtoItem, SneakerL
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
     }
 }

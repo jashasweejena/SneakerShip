@@ -1,11 +1,14 @@
 package com.example.sneakership.ui.home.data
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 data class SneakersListDto(
     val sneakersItems: ArrayList<SneakersListDtoItem>
-)
+) : Parcelable
 
+@Parcelize
 data class SneakersListDtoItem(
     @SerializedName("brand")
     val brand: String,
@@ -27,8 +30,9 @@ data class SneakersListDtoItem(
     val sizes: List<Int>,
     @SerializedName("styleId")
     val styleId: String
-)
+) : Parcelable
 
+@Parcelize
 data class Media(
     @SerializedName("imageUrl")
     val imageUrl: String,
@@ -36,4 +40,4 @@ data class Media(
     val smallImageUrl: String,
     @SerializedName("thumbUrl")
     val thumbUrl: String
-)
+) :  Parcelable

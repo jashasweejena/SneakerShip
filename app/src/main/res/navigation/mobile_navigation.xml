@@ -9,13 +9,21 @@
         android:id="@+id/navigation_home"
         android:name="com.example.sneakership.ui.home.SneakerHomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_sneaker_details"
+            app:destination="@id/navigation_sneaker_details" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.sneakership.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_sneaker_details"
+        android:name="com.example.sneakership.ui.details.SneakerDetailsFragment"
+        android:label="Sneaker Details"
+        tools:layout="@layout/fragment_sneaker_details" >
+        <argument
+            android:name="sneaker"
+            app:argType="com.example.sneakership.ui.home.data.SneakersListDtoItem" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"

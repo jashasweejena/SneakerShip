@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,7 @@ class SneakerHomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val sneakerListAdapter: SneakerListRecyclerViewAdapter by lazy { SneakerListRecyclerViewAdapter() }
+    private val sneakerListAdapter: SneakerListRecyclerViewAdapter by lazy { SneakerListRecyclerViewAdapter(::onSneakerItemClick) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,10 +36,6 @@ class SneakerHomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         return root
     }
 
@@ -97,6 +94,11 @@ class SneakerHomeFragment : Fragment() {
             )
         )
 
+    }
+
+    private fun onSneakerItemClick(item: SneakersListDtoItem) {
+        val action = SneakerHomeFragmentDirections.actionNavigationHomeToNavigationSneakerDetails(item)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {
