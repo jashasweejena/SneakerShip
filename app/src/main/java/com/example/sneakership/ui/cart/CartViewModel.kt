@@ -1,5 +1,6 @@
 package com.example.sneakership.ui.cart
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,8 +11,9 @@ import com.example.sneakership.data.local.CartItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class CartViewModel(private val cartDao: CartDao) : ViewModel() {
+class CartViewModel @ViewModelInject constructor(private val cartDao: CartDao) : ViewModel() {
 
     val cartItems: LiveData<List<CartItem>> = cartDao.getCartItems().asLiveData()
 

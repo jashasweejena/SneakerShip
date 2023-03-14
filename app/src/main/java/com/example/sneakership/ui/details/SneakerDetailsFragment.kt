@@ -15,7 +15,10 @@ import com.example.sneakership.data.local.SneakerDatabase
 import com.example.sneakership.databinding.FragmentSneakerDetailsBinding
 import com.example.sneakership.ui.cart.CartViewModel
 import com.example.sneakership.ui.cart.CartViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SneakerDetailsFragment : Fragment() {
 
     private var _binding: FragmentSneakerDetailsBinding? = null
@@ -24,10 +27,8 @@ class SneakerDetailsFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private val args: SneakerDetailsFragmentArgs by navArgs()
-    private var cartDao: CartDao? = null
 
-    private var cartViewModelFactory: CartViewModelFactory? = null
-    private var cartViewModel: CartViewModel? = null
+    private val cartViewModel: CartViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,10 +37,6 @@ class SneakerDetailsFragment : Fragment() {
     ): View {
         val dashboardViewModel =
             ViewModelProvider(this).get(SneakerDetailsViewModel::class.java)
-
-        cartDao = context?.let { SneakerDatabase.getDatabase(it).cartDao() }
-        cartViewModelFactory = cartDao?.let { CartViewModelFactory(it) }
-        cartViewModel = cartViewModelFactory?.let { ViewModelProvider(this, it)[CartViewModel::class.java] }
 
         _binding = FragmentSneakerDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root

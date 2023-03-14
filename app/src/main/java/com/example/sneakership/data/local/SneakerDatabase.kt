@@ -1,5 +1,6 @@
 package com.example.sneakership.data.local
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -13,10 +14,10 @@ abstract class SneakerDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: SneakerDatabase? = null
 
-        fun getDatabase(context: Context): SneakerDatabase {
+        fun getDatabase(app: Application): SneakerDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext,
+                    app,
                     SneakerDatabase::class.java,
                     "sneaker_shop_db"
                 ).build()

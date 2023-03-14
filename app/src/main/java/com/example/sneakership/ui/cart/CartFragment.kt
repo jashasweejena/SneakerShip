@@ -14,7 +14,9 @@ import com.example.sneakership.data.local.CartDao
 import com.example.sneakership.data.local.CartItem
 import com.example.sneakership.data.local.SneakerDatabase
 import com.example.sneakership.databinding.FragmentNotificationsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CartFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
@@ -23,10 +25,7 @@ class CartFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private var cartDao: CartDao? = null
-
-    private var cartViewModelFactory: CartViewModelFactory? = null
-    private var cartViewModel: CartViewModel? = null
+    private val cartViewModel: CartViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,10 +35,6 @@ class CartFragment : Fragment() {
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        cartDao = context?.let { SneakerDatabase.getDatabase(it).cartDao() }
-        cartViewModelFactory = cartDao?.let { CartViewModelFactory(it) }
-        cartViewModel = cartViewModelFactory?.let { ViewModelProvider(this, it)[CartViewModel::class.java] }
 
         val cartAdapter = CartAdapter(object: CartAdapter.CartClickedListeners {
             override fun onDeleteClicked(shoeCart: CartItem?) {
