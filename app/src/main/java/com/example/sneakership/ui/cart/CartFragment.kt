@@ -1,4 +1,4 @@
-package com.example.sneakership.ui.details
+package com.example.sneakership.ui.cart
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,22 +8,21 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.sneakership.data.local.CartDao
 import com.example.sneakership.data.local.CartItem
 import com.example.sneakership.data.local.SneakerDatabase
-import com.example.sneakership.databinding.FragmentSneakerDetailsBinding
-import com.example.sneakership.ui.cart.CartViewModel
-import com.example.sneakership.ui.cart.CartViewModelFactory
+import com.example.sneakership.databinding.FragmentNotificationsBinding
 
-class SneakerDetailsFragment : Fragment() {
+class CartFragment : Fragment() {
 
-    private var _binding: FragmentSneakerDetailsBinding? = null
+    private var _binding: FragmentNotificationsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val args: SneakerDetailsFragmentArgs by navArgs()
+
     private var cartDao: CartDao? = null
 
     private var cartViewModelFactory: CartViewModelFactory? = null
@@ -34,25 +33,38 @@ class SneakerDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(SneakerDetailsViewModel::class.java)
+
+        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
         cartDao = context?.let { SneakerDatabase.getDatabase(it).cartDao() }
         cartViewModelFactory = cartDao?.let { CartViewModelFactory(it) }
         cartViewModel = cartViewModelFactory?.let { ViewModelProvider(this, it)[CartViewModel::class.java] }
 
-        _binding = FragmentSneakerDetailsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val cartAdapter = CartAdapter(object: CartAdapter.CartClickedListeners {
+            override fun onDeleteClicked(shoeCart: CartItem?) {
+
+            }
+
+            override fun onPlusClicked(shoeCart: CartItem?) {
+
+            }
+
+            override fun onMinusClicked(shoeCart: CartItem?) {
+
+            }
+
+        })
+
+        binding.cartRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = cartAdapter
+        }
+
+        cartViewModel?.cartItems?.observe(viewLifecycleOwner) {
+            cartAdapter.submitList(it)
+        }
         return root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.item = args.sneaker
-
-        binding.btnAddToCart.setOnClickListener { cartViewModel?.insertCartItem(CartItem(
-            System.currentTimeMillis(), 234L, args.sneaker.name, args.sneaker.retailPrice.toDouble(), 1
-        )) }
     }
 
     override fun onDestroyView() {
