@@ -1,12 +1,8 @@
-package com.example.sneakership.ui.home.data
+package com.example.sneakership.network.sneaker
+
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-
-@Parcelize
-data class SneakersListDto(
-    val sneakersItems: ArrayList<SneakersListDtoItem>
-) : Parcelable
 
 @Parcelize
 data class SneakersListDtoItem(

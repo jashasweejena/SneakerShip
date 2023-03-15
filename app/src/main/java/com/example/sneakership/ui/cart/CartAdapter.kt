@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sneakership.data.local.CartItem
+import com.example.sneakership.data.local.cart.CartItem
 import com.example.sneakership.databinding.ItemCartListBinding
 import com.example.sneakership.ui.cart.CartAdapter.CartViewHolder
 

@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_sneaker_details" >
         <argument
             android:name="sneaker"
-            app:argType="com.example.sneakership.ui.home.data.SneakersListDtoItem" />
+            app:argType="com.example.sneakership.data.local.sneaker.SneakerUiItem" />
     </fragment>
 
     <fragment

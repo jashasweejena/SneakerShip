@@ -1,7 +1,12 @@
 package com.example.sneakership.di
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
 import com.example.sneakership.data.local.SneakerDatabase
+import com.example.sneakership.network.IOnlineChecker
+import com.example.sneakership.network.OnlineChecker
+import com.example.sneakership.network.ResponseHandler
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,4 +25,27 @@ object AppModule {
 
     @Provides
     fun provideCartDao(db: SneakerDatabase) = db.cartDao()
+
+    @Provides
+    fun provideSneakerDao(db: SneakerDatabase) = db.sneakerDao()
+
+    @Singleton
+    @Provides
+    fun provideConnectivityManager(application: Application): ConnectivityManager {
+        return application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    }
+    @Provides
+    @Singleton
+    fun provideOnlineChecker(
+        connectivityManager: ConnectivityManager
+    ): IOnlineChecker {
+        return OnlineChecker(connectivityManager)
+    }
+
+    @Provides
+    @Singleton
+    fun provideResponseHandler(
+    ): ResponseHandler {
+        return ResponseHandler()
+    }
 }

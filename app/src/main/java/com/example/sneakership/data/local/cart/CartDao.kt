@@ -1,4 +1,4 @@
-package com.example.sneakership.data.local
+package com.example.sneakership.data.local.cart
 
 import androidx.room.Dao
 import androidx.room.Delete

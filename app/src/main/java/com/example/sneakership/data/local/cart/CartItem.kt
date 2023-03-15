@@ -1,4 +1,4 @@
-package com.example.sneakership.data.local
+package com.example.sneakership.data.local.cart
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

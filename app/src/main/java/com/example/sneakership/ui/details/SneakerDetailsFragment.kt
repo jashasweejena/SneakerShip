@@ -4,19 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.example.sneakership.data.local.CartDao
-import com.example.sneakership.data.local.CartItem
-import com.example.sneakership.data.local.SneakerDatabase
+import com.example.sneakership.data.local.cart.CartItem
 import com.example.sneakership.databinding.FragmentSneakerDetailsBinding
 import com.example.sneakership.ui.cart.CartViewModel
-import com.example.sneakership.ui.cart.CartViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SneakerDetailsFragment : Fragment() {
@@ -47,9 +42,11 @@ class SneakerDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.item = args.sneaker
 
-        binding.btnAddToCart.setOnClickListener { cartViewModel?.insertCartItem(CartItem(
-            System.currentTimeMillis(), 234L, args.sneaker.name, args.sneaker.retailPrice.toDouble(), 1
-        )) }
+//        binding.btnAddToCart.setOnClickListener { cartViewModel?.insertCartItem(
+//            CartItem(
+//            System.currentTimeMillis(), 234L, args.sneaker.name, args.sneaker.retailPrice.toDouble(), 1
+//        )
+//        ) }
     }
 
     override fun onDestroyView() {

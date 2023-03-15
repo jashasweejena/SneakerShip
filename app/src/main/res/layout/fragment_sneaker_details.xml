@@ -3,7 +3,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.sneakership.ui.home.data.SneakersListDtoItem" />
+            type="com.example.sneakership.data.local.sneaker.SneakerUiItem" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
