@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sneakership.data.local.sneaker.SneakerUiItem
 import com.example.sneakership.network.Resource
@@ -24,4 +25,6 @@ class SneakersListViewModel @ViewModelInject constructor(
             }
         }
     }
+
+    fun searchSneakers(searchQuery: String) = sneakerRepository.searchSneakers(searchQuery).asLiveData()
 }

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.sneakership.data.local.sneaker.SneakerUiItem
 import com.example.sneakership.databinding.ItemSneakersListBinding
 
@@ -31,6 +32,9 @@ class SneakerListRecyclerViewAdapter(private val listener: (item: SneakerUiItem)
             binding.root.setOnClickListener {
                 listener(item)
             }
+            Glide.with(binding.root.context)
+                .load(item.media.smallImageUrl)
+                .into(binding.ivShoe)
         }
 
 

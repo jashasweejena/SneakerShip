@@ -8,6 +8,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.sneakership.databinding.ActivityMainBinding
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.MaterialShapeDrawable
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +22,15 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
+//        val radius = 100f
+//        val bottomNavigationViewBackground = binding.navView.background as MaterialShapeDrawable
+//        bottomNavigationViewBackground.shapeAppearanceModel =
+//            bottomNavigationViewBackground.shapeAppearanceModel.toBuilder()
+//                .setTopRightCorner(CornerFamily.ROUNDED, radius)
+//                .setTopLeftCorner(CornerFamily.ROUNDED, radius)
+//                .build()
 
         val navView: BottomNavigationView = binding.navView
 

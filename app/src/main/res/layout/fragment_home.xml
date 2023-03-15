@@ -4,7 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".ui.home.SneakerHomeFragment">
+
+    <TextView
+        android:id="@+id/tv_logo"
+        android:text="SNEAKERSHIP"
+        android:fontFamily="@font/firasans_bold"
+        android:textSize="28sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/orange"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_search"
+        app:tint="@color/orange" />
+
+    <TextView
+        android:id="@+id/tv_popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Popular"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:fontFamily="@font/lato_black"/>
+
+    <TextView
+        android:id="@+id/tv_sort_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_logo"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Sort by"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:drawableTint="#acacac"
+        android:textColor="#acacac"
+        android:textSize="28sp"
+        android:fontFamily="@font/lato_regular"/>
 
     <ProgressBar
         android:id="@+id/progress_circular"
@@ -20,10 +66,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_popular"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

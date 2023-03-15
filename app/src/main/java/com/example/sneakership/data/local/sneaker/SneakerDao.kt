@@ -15,4 +15,7 @@ interface SneakerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(sneakers: List<SneakerUiItem>)
 
+    @Query("SELECT * FROM sneaker_table WHERE name LIKE :searchQuery OR brand LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): Flow<List<SneakerUiItem>>
+
 }

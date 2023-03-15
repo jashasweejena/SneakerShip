@@ -1,5 +1,6 @@
 package com.example.sneakership.network
 
+import android.util.Log
 import com.example.sneakership.data.local.sneaker.SneakerUiItem
 import com.example.sneakership.network.sneaker.SneakersListDtoItem
 import kotlinx.coroutines.Dispatchers
@@ -23,10 +24,12 @@ class ResponseHandler {
                         if (!errorBody.isNullOrEmpty()) {
                             errorMessage = errorBody
                         }
+                        Log.d("ResponseHandler", "safeApiCall: " + errorMessage)
                         emit(Resource.Error(message = errorMessage, throwable = null))
                     }
                 }
             } catch (e: Exception) {
+                Log.d("ResponseHandler", "safeApiCall: " + e.message)
                 emit(Resource.Error(message = e.message ?: e.toString(), throwable = e.cause))
             }
             emit(Resource.Loading(isLoading = false))

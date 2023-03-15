@@ -2,8 +2,11 @@ package com.example.sneakership.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sneakership.R
 import com.example.sneakership.data.local.sneaker.SneakerUiItem
 import com.example.sneakership.databinding.FragmentHomeBinding
 import com.example.sneakership.network.Resource
@@ -36,6 +40,12 @@ class SneakerHomeFragment : Fragment() {
         val root: View = binding.root
 
         return root
+    }
+    private fun searchDatabase(query: String) {
+        val searchQuery = "%${query}%"
+        viewModel.searchSneakers(searchQuery).observe(viewLifecycleOwner) {
+            sneakerListAdapter.submitList(it)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
