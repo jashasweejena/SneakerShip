@@ -14,17 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sneakership.data.local.sneaker.SneakerUiItem
 import com.example.sneakership.databinding.FragmentHomeBinding
 import com.example.sneakership.network.Resource
-import com.example.sneakership.network.sneaker.Media
-import com.example.sneakership.network.sneaker.SneakersListDtoItem
+import com.example.sneakership.utils.gone
+import com.example.sneakership.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SneakerHomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private val sneakerListAdapter: SneakerListRecyclerViewAdapter by lazy { SneakerListRecyclerViewAdapter(::onSneakerItemClick) }
@@ -35,9 +32,6 @@ class SneakerHomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        val homeViewModel =
-//            ViewModelProvider(this).get(SneakersListViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -57,61 +51,22 @@ class SneakerHomeFragment : Fragment() {
                 is Resource.Success -> {
                     sneakerListAdapter.submitList(it.data)
                 }
-                is Resource.Loading -> {}
+                is Resource.Loading -> {
+                    handleLoaderVisibility(it.isLoading)
+                }
                 is Resource.Error -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
-//        sneakerListAdapter.submitList(
-//            arrayListOf(
-//                SneakersListDtoItem(
-//                    "Nike",
-//                    listOf(),
-//                    "Male",
-//                    "3131313",
-//                    Media(
-//                        "", "", ""
-//                    ),
-//                    "Super Jordan",
-//                    "25-12-2000",
-//                    1221,
-//                    listOf(),
-//                    "fsdf"
-//                ),
-//
-//                SneakersListDtoItem(
-//                    "Nike",
-//                    listOf(),
-//                    "Male",
-//                    "3131313",
-//                    Media(
-//                        "", "", ""
-//                    ),
-//                    "Super Hike",
-//                    "25-12-2000",
-//                    1221,
-//                    listOf(),
-//                    "fsdf"
-//                ),
-//
-//                SneakersListDtoItem(
-//                    "Nike",
-//                    listOf(),
-//                    "Male",
-//                    "3131313",
-//                    Media(
-//                        "", "", ""
-//                    ),
-//                    "Super Hike",
-//                    "25-12-2000",
-//                    1221,
-//                    listOf(),
-//                    "fsdf"
-//                )
-//            )
-//        )
+    }
 
+    private fun handleLoaderVisibility(shouldShow: Boolean) {
+        if (shouldShow) {
+            binding.progressCircular.show()
+        } else {
+            binding.progressCircular.gone()
+        }
     }
 
     private fun onSneakerItemClick(item: SneakerUiItem) {
