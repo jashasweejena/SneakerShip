@@ -46,6 +46,10 @@ The Presentation section contains files related to UI.
 
 The app fetches data from a dummy JSON data hosted on Firebase Cloud Storage due to the unavailability of a proper API.
 
+## Testing
+
+The app contains Unit tests for the 'CartRepository' class. 
+
 ## Possible Improvements
 
 Due to time constraints, certain improvements could not be implemented in the app. These improvements include:
