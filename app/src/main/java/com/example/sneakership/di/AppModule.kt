@@ -4,9 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import com.example.sneakership.data.local.SneakerDatabase
-import com.example.sneakership.network.IOnlineChecker
-import com.example.sneakership.network.OnlineChecker
-import com.example.sneakership.network.ResponseHandler
+import com.example.sneakership.utils.network.IOnlineChecker
+import com.example.sneakership.utils.network.OnlineChecker
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,10 +41,10 @@ object AppModule {
         return OnlineChecker(connectivityManager)
     }
 
-    @Provides
-    @Singleton
-    fun provideResponseHandler(
-    ): ResponseHandler {
-        return ResponseHandler()
-    }
+//    @Provides
+//    @Singleton
+//    fun provideResponseHandler(
+//    ): ResponseHandler {
+//        return ResponseHandler()
+//    }
 }

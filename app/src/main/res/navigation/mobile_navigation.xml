@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.sneakership.ui.home.SneakerHomeFragment"
+        android:name="com.example.sneakership.feature.home.presentation.view.SneakerHomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/navigation_sneaker_details"
-        android:name="com.example.sneakership.ui.details.SneakerDetailsFragment"
+        android:name="com.example.sneakership.feature.details.presentation.view.SneakerDetailsFragment"
         android:label="Sneaker Details"
         tools:layout="@layout/fragment_sneaker_details" >
         <argument
@@ -30,12 +30,12 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.sneakership.ui.cart.CartFragment"
+        android:name="com.example.sneakership.feature.cart.presentation.view.CartFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
     <dialog
         android:id="@+id/bottomSheet"
-        android:name="com.example.sneakership.ui.home.SneakerSortBottomSheet"
+        android:name="com.example.sneakership.feature.home.presentation.view.SneakerSortBottomSheet"
         tools:layout="@layout/layout_sort_bottomsheet" />
 </navigation>

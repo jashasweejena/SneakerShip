@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.sneakership.ui.home.SortOrder
+import com.example.sneakership.feature.home.enums.SortOrder
 import kotlinx.coroutines.flow.Flow
 
 @Dao

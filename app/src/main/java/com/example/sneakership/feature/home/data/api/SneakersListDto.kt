@@ -1,24 +1,19 @@
-package com.example.sneakership.data.local.sneaker
+package com.example.sneakership.feature.home.data.api
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.example.sneakership.feature.home.data.api.Media
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "sneaker_table")
 @Parcelize
-data class SneakerUiItem(
-    @PrimaryKey
-    @SerializedName("id")
-    val id: String,
+data class SneakersListDtoItem(
     @SerializedName("brand")
     val brand: String,
     @SerializedName("colors")
     val colors: List<String>,
     @SerializedName("gender")
     val gender: String,
+    @SerializedName("id")
+    val id: String,
     @SerializedName("media")
     val media: Media,
     @SerializedName("name")
@@ -32,3 +27,13 @@ data class SneakerUiItem(
     @SerializedName("styleId")
     val styleId: String
 ) : Parcelable
+
+@Parcelize
+data class Media(
+    @SerializedName("imageUrl")
+    val imageUrl: String,
+    @SerializedName("smallImageUrl")
+    val smallImageUrl: String,
+    @SerializedName("thumbUrl")
+    val thumbUrl: String
+) :  Parcelable

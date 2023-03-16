@@ -5,8 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.sneakership.data.local.cart.CartDao
-import com.example.sneakership.data.local.cart.CartItem
+import com.example.sneakership.feature.cart.data.local.CartDao
+import com.example.sneakership.feature.cart.domain.models.CartItem
 import com.example.sneakership.data.local.sneaker.SneakerDao
 import com.example.sneakership.data.local.sneaker.SneakerUiItem
 

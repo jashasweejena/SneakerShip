@@ -1,6 +1,6 @@
 package com.example.sneakership.di
 
-import com.example.sneakership.network.sneaker.SneakerApiService
+import com.example.sneakership.feature.home.data.api.SneakerApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

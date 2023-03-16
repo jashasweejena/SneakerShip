@@ -1,7 +1,7 @@
-package com.example.sneakership.ui.home.data
+package com.example.sneakership.feature.home.data
 
 import com.example.sneakership.data.local.sneaker.SneakerUiItem
-import com.example.sneakership.network.sneaker.SneakersListDtoItem
+import com.example.sneakership.feature.home.data.api.SneakersListDtoItem
 
 fun SneakersListDtoItem.toUiItem(): SneakerUiItem =
     SneakerUiItem(id, brand, colors, gender, media, name, releaseDate, retailPrice, sizes, styleId)

@@ -1,7 +1,7 @@
 package com.example.sneakership.data.local
 
 import androidx.room.TypeConverter
-import com.example.sneakership.network.sneaker.Media
+import com.example.sneakership.feature.home.data.api.Media
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 
