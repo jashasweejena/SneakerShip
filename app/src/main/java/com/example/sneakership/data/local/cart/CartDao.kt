@@ -18,6 +18,12 @@ interface CartDao {
     @Delete
     suspend fun deleteCartItem(cartItem: CartItem)
 
+    @Query("UPDATE cart_items SET quantity=:updatedQuantity WHERE id=:id")
+    suspend fun updateQuantity(id: Long, updatedQuantity: Int)
+
     @Query("DELETE FROM cart_items")
     suspend fun deleteAllCartItems()
+
+    @Query("SELECT SUM(price * quantity) AS totalPrice FROM cart_items")
+    fun getSubTotal(): Flow<Double?>
 }

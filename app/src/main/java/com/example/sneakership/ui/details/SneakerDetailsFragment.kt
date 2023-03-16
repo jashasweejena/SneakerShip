@@ -42,11 +42,12 @@ class SneakerDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.item = args.sneaker
 
-//        binding.btnAddToCart.setOnClickListener { cartViewModel?.insertCartItem(
-//            CartItem(
-//            System.currentTimeMillis(), 234L, args.sneaker.name, args.sneaker.retailPrice.toDouble(), 1
-//        )
-//        ) }
+        binding.btnAddToCart.setOnClickListener { cartViewModel.insertCartItem(
+            CartItem(
+            System.currentTimeMillis(), args.sneaker.id, args.sneaker.name, args.sneaker.retailPrice.toDouble(), 1,
+                args.sneaker.media.smallImageUrl
+        )
+        ) }
     }
 
     override fun onDestroyView() {

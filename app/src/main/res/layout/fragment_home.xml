@@ -19,12 +19,22 @@
         android:layout_height="wrap_content" />
 
     <ImageView
+        android:id="@+id/btn_search"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_search"
         app:tint="@color/orange" />
+
+    <EditText
+        android:id="@+id/et_search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_search"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/tv_popular"

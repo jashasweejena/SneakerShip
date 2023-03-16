@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.sneakership.data.local.cart.CartItem
 import com.example.sneakership.databinding.ItemCartListBinding
 import com.example.sneakership.ui.cart.CartAdapter.CartViewHolder
@@ -39,12 +40,15 @@ class CartAdapter(private val cartClickedListeners: CartClickedListeners) :
     inner class CartViewHolder(private val binding: ItemCartListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(shoeCart: CartItem) {
             binding.eachCartItemName.text = shoeCart.name
-            binding.eachCartItemBrandNameTv.text = shoeCart.name
             binding.eachCartItemQuantityTV.text = shoeCart.quantity.toString() + ""
             binding.eachCartItemPriceTv.text = "" + shoeCart.price
-            binding.eachCartItemDeleteBtn.setOnClickListener { cartClickedListeners.onDeleteClicked(shoeCart) }
+            binding.btnRemove.setOnClickListener { cartClickedListeners.onDeleteClicked(shoeCart) }
             binding.eachCartItemAddQuantityBtn.setOnClickListener { cartClickedListeners.onPlusClicked(shoeCart) }
             binding.eachCartItemMinusQuantityBtn.setOnClickListener { cartClickedListeners.onMinusClicked(shoeCart) }
+
+            Glide.with(binding.root.context)
+                .load(shoeCart.imageUrl)
+                .into(binding.eachCartItemIV)
         }
     }
 

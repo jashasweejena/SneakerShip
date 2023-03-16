@@ -26,5 +26,11 @@ class SneakersListViewModel @ViewModelInject constructor(
         }
     }
 
-    fun searchSneakers(searchQuery: String) = sneakerRepository.searchSneakers(searchQuery).asLiveData()
+    fun searchSneakers(searchQuery: String) {
+        viewModelScope.launch {
+            sneakerRepository.searchSneakers(searchQuery).collect {
+                _sneakersLiveData.value = Resource.Success(data = it)
+            }
+        }
+    }
 }
