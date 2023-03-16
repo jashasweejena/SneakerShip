@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_sneaker_details"
             app:destination="@id/navigation_sneaker_details" />
+        <action
+            android:id="@+id/action_navigation_home_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
     </fragment>
 
     <fragment
@@ -30,4 +33,9 @@
         android:name="com.example.sneakership.ui.cart.CartFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <dialog
+        android:id="@+id/bottomSheet"
+        android:name="com.example.sneakership.ui.home.SneakerSortBottomSheet"
+        tools:layout="@layout/layout_sort_bottomsheet" />
 </navigation>

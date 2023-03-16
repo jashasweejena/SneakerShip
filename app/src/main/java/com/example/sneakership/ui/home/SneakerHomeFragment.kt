@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.util.query
 import com.example.sneakership.data.local.sneaker.SneakerUiItem
 import com.example.sneakership.databinding.FragmentHomeBinding
 import com.example.sneakership.network.Resource
@@ -39,33 +40,32 @@ class SneakerHomeFragment : Fragment() {
 
         return root
     }
-//    private fun searchDatabase(query: String) {
-//        val searchQuery = "%${query}%"
-//        viewModel.searchSneakers(searchQuery).observe(viewLifecycleOwner) {
-//            sneakerListAdapter.submitList(it)
-//        }
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupFragmentResultObserver()
         viewModel.fetchSneakers()
         binding.rvList.apply {
             layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
             adapter = sneakerListAdapter
         }
 
+
         binding.btnSearch.setOnClickListener {
             toggleSearchBarVisibility()
         }
 
+        binding.tvSortBy.setOnClickListener {
+            SneakerSortBottomSheet.show(childFragmentManager)
+        }
+
         binding.etSearch.addTextChangedListener(
             onTextChanged = { charSequence: CharSequence?, _, _, _ ->
-                val query = "%${charSequence}%"
-                viewModel.searchSneakers(query)
+                viewModel.searchQuery.value = "" + charSequence
             },
         )
 
-        viewModel.sneakersLiveData.observe(viewLifecycleOwner) {
+        viewModel.uiLiveData.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
                     sneakerListAdapter.submitList(it.data)
@@ -104,6 +104,17 @@ class SneakerHomeFragment : Fragment() {
     private fun onSneakerItemClick(item: SneakerUiItem) {
         val action = SneakerHomeFragmentDirections.actionNavigationHomeToNavigationSneakerDetails(item)
         findNavController().navigate(action)
+    }
+
+    private fun setupFragmentResultObserver() {
+        childFragmentManager.setFragmentResultListener(SneakerSortBottomSheet.REQUEST_KEY, viewLifecycleOwner) { requestKey, bundle ->
+            if (requestKey == SneakerSortBottomSheet.REQUEST_KEY) {
+                val sortOrder = bundle.getSerializable(SneakerSortBottomSheet.BUNDLE_KEY_SORT_ORDER) as? SortOrder
+                sortOrder ?: return@setFragmentResultListener
+
+                viewModel.sortOrder.value = sortOrder
+            }
+        }
     }
 
     override fun onDestroyView() {
